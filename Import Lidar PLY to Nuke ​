@@ -1,0 +1,91 @@
+# TODO:
+# detect .ply files written with a different order of pos / normals / colors
+# more efficiently access the file in question!
+# probably won't work on windows due to /tmp
+import math
+import time
+import nuke
+import random
+import math
+# GLOBALS
+singleLineInput = 300000
+filenameSearch = None
+output = "/tmp/plyConversion_%s.nk" % str(int(time.mktime(time.gmtime())))
+points = "" # long string representing all the point positions
+normals = "" # long string representing all the point normals
+colors = "" # long string representing all the point colors
+numVerts = ""
+total = 0
+data = False # whether we're in the "data" section of the ply file
+vertEntries = [] # lines of the file pertaining to verts
+# randomly select n items from a list
+# inspired by a discussion here: http://www/gregable.com/2007/10/reservoir-sampling.html
+def randomSelection(numToPick,items):
+shuffledItems = items
+random.shuffle(shuffledItems)
+return shuffledItems[0:numToPick]
+# GUI!
+p = nuke.Panel(".ply importer")
+p.addFilenameSearch(".ply file", filenameSearch)
+p.addSingleLineInput("Maximum points to create", singleLineInput)
+p.addButton("Cancel")
+p.addButton("OK")
+result = p.show()
+# Parse choices
+path = p.value(".ply file")
+MAX_POINTS = int(p.value("Maximum points to create"))
+# Processing!
+r = open(path,"r")
+lines = r.readlines()
+r.close
+# parse .ply file line by line!
+# this is hideously inefficient...we should bomb out when we hit the last vert line...
+for i,line in enumerate(lines):
+# if we've hit the data section, add only the lines that contain vertex info
+if data and total < numVerts:
+vertEntries.append(line)
+total += 1
+# calculate the number of vertices we're going to be loading!
+if "element vertex" in line:
+numVerts = int(line.split()[2])
+print "%s points detected! " % numVerts
+# if the header is over, toggle the data boolean to true: now we're in the payload of the file
+if "end_header" in line:
+data = True
+# process every point, or a fixed, random selection
+if MAX_POINTS > numVerts:
+lines = vertEntries
+else:
+# Thanks Mike Lang for suggesting an optimization could be used here!
+print "selecting only %s points at random! " % MAX_POINTS
+lines = randomSelection(MAX_POINTS,vertEntries)
+# now that we have our selection, build up our template strings!
+for line in lines:
+datasplit = line.split()
+points += "%s " % " ".join(datasplit[0:3])
+normals += "%s " % " ".join(datasplit[3:6])
+colors += "%s " % " ".join([str(float(v)/255.0) for v in datasplit[6:9]]) # ignore alpha value
+# Nuke node specifics:
+name = path.split("/")[-1]
+label = "%s points" % (len(lines))
+template = """
+set cut_paste_input [stack 0]
+version 7.0 v4
+BakedPointCloud {
+inputs 0
+pointSize 2
+serializeKnob ""
+serializePoints "%s %s "
+serializeNormals "%s %s "
+serializeColors "%s %s "
+name %s
+label "%s"
+xpos 510
+ypos 140
+}""" % (total, points, total, normals, total, colors,name,label)
+# Write out .nk file to output location (somewhere in /tmp)
+w = open(output,"w")
+w.write(template)
+w.close()
+nuke.nodePaste(output)
+​
