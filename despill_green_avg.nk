@@ -1,0 +1,43 @@
+set cut_paste_input [stack 0]
+version 8.0 v1b41
+push $cut_paste_input
+Dot {
+ name Dot6
+ selected true
+ xpos 11275
+ ypos -5588
+}
+set N3d43a7f0 [stack 0]
+push $N3d43a7f0
+Expression {
+ expr1 "g > (r+b)/2 ?(r+b)/2 : g"
+ name Expression1
+ selected true
+ xpos 11241
+ ypos -5533
+}
+set N390d61c0 [stack 0]
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge49
+ selected true
+ xpos 11373
+ ypos -5533
+}
+Saturation {
+ saturation 0
+ name Saturation7
+ selected true
+ xpos 11373
+ ypos -5509
+}
+push $N390d61c0
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge50
+ selected true
+ xpos 11241
+ ypos -5453
+}

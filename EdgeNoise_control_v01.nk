@@ -1,0 +1,12 @@
+set cut_paste_input [stack 0]
+version 11.0 v4
+push $cut_paste_input
+Shuffle {
+red black
+green black
+blue black
+name Shuffle11
+selected true
+xpos 1401
+ypos 412
+}

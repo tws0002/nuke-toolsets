@@ -1,0 +1,111 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+BackdropNode {
+ inputs 0
+ name ChromaticAbb_v01
+ selected true
+ xpos -377
+ ypos -88
+ bdwidth 311
+ bdheight 229
+}
+push $cut_paste_input
+Dot {
+ name Dot3
+ selected true
+ xpos -139
+ ypos -73
+}
+set N107e6660 [stack 0]
+Remove {
+ channels {rgba.red rgba.green -rgba.blue}
+ name CAblue
+ selected true
+ xpos -173
+ ypos -12
+}
+LensDistortion1_0 {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 4 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 0.003
+ asymmetricDistortion {-0.005 0}
+ "Card Parameters" 1
+ cardScale {1.003018141 1.003018141 1}
+ a -0.0003572485584
+ b -0.002105023712
+ c -0.0007372212131
+ name LensDistortionBlue
+ selected true
+ xpos -173
+ ypos 47
+}
+Dot {
+ name Dot5
+ selected true
+ xpos -139
+ ypos 119
+}
+push $N107e6660
+Dot {
+ name Dot1
+ selected true
+ xpos -232
+ ypos -73
+}
+set N107dfeb0 [stack 0]
+Dot {
+ name Dot2
+ selected true
+ xpos -324
+ ypos -73
+}
+Remove {
+ channels {-rgba.red rgba.green rgba.blue}
+ name CAred
+ selected true
+ xpos -358
+ ypos -11
+}
+LensDistortion1_0 {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 4 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.005
+ cardScale {0.9950492978 0.9950492978 1}
+ a 0.0009185955278
+ b 0.002952343086
+ c 0.001119634719
+ name LensDistortionRed
+ selected true
+ xpos -358
+ ypos 46
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -324
+ ypos 79
+}
+push $N107dfeb0
+Remove {
+ channels {rgba.red -rgba.green rgba.blue}
+ name CAgreen
+ selected true
+ xpos -266
+ ypos -11
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge5
+ selected true
+ xpos -266
+ ypos 76
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge6
+ selected true
+ xpos -266
+ ypos 116
+}

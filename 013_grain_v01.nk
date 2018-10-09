@@ -1,0 +1,29 @@
+set cut_paste_input [stack 0]
+version 11.0 v4
+push $cut_paste_input
+L_Grain_v05 {
+name L_Grain_v05_1
+selected true
+xpos 4306
+ypos 2251
+rSize 2.63
+gSize 2.02
+bSize 2.74
+rBlack 0.02
+gBlack 0.025
+bBlack 0.043
+Minimum 0
+rMid 0.265
+gMid 0.12
+bMid 0.13
+Highs 1
+rHigh 1
+gHigh 0.96
+Irregularity 1
+rIrregularity 0.93
+bIrregularity 0.945
+Softness 1
+rSoftness 0.08
+Other 1
+MaskGrade 0
+}

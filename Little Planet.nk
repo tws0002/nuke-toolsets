@@ -1,0 +1,52 @@
+set cut_paste_input [stack 0]
+version 9.0 v1
+push $cut_paste_input
+Reformat {
+ type "to box"
+ format "2048 2048 0 0 2048 2048 1 square_2K"
+ box_width 4096
+ box_height 4096
+ box_fixed true
+ resize distort
+ name Reformat1
+ selected true
+ xpos 26
+ ypos 57
+}
+Expression {
+ temp_name0 p
+ temp_expr0 sqrt((x/width-xo)*(x/width-xo)+(y/height-yo)*(y/height-yo))
+ temp_name1 c
+ temp_expr1 "2*atan2(p, 2*arr)"
+ temp_name2 lat
+ temp_expr2 "asin(cos(c)*sin(lat1) + (((y/height-yo)*sin(c)*cos(lat1)) / p))"
+ temp_name3 long
+ temp_expr3 "(long0 + atan((x/width-xo)*sin(c), p*cos(lat1)*cos(c) - (y/height-yo)*sin(lat1)*sin(c)))"
+ expr0 "r(((long-longo)*longm*width)%width < 0 ? width + ((long-longo)*longm*width)%width : ((long-longo)*longm*width)%width, (lat-lato)*latm*height)"
+ expr1 "g(((long-longo)*longm*width)%width < 0 ? width + ((long-longo)*longm*width)%width : ((long-longo)*longm*width)%width, (lat-lato)*latm*height)"
+ expr2 "b(((long-longo)*longm*width)%width < 0 ? width + ((long-longo)*longm*width)%width : ((long-longo)*longm*width)%width, (lat-lato)*latm*height)"
+ name Stereographic
+ selected true
+ xpos 26
+ ypos 142
+ addUserKnob {20 Stereographic}
+ addUserKnob {7 arr t "Radius of the sphere projected from" R 0 0.5}
+ arr 0.0918854
+ addUserKnob {7 lat1 t "Latitude offset - repeats outside the range 0 to 2*pi" R -5 5}
+ lat1 -0.706667
+ addUserKnob {7 long0 t "Longitude offset - repeats outside the range 0 to 2*pi" R -5 5}
+ long0 0.253333
+ addUserKnob {7 xo t "x offset of result" R -1 1}
+ xo 0.5
+ addUserKnob {7 yo t "y offset of result" R -1 1}
+ yo 0.5
+ addUserKnob {26 Information T "This takes a latlong 360x180 panorama as input and reprojects it as a stereographic panorama.\nYou can use the SphericalTransform node to convert other kinds of pano to latlong,\nalso known as equirectangular or confusingly as \"spherical\" in Nuke's Camera node.\n\nTo understand how this projection works, imagine the input pano printed on acetate and\nwrapped around a sphere.  This sphere then sits on a table.  A light is sat just inside the\nsphere, at the top, pointing downwards and projecting the image onto the table. The table is\nthe output image.  Every spot on the sphere will be projected onto a different part of the table\nexcept the point at the very top, just next to the light, which is never seen.\n\nYou don't want to touch the knobs below unless you want a messy partial image :)\n\nlewis@lewissaaunders.com"}
+ addUserKnob {7 longo R -4 4}
+ longo {{-pi}}
+ addUserKnob {7 lato R -4 4}
+ lato {{-pi/2}}
+ addUserKnob {7 longm R -4 4}
+ longm {{1/(2*pi)}}
+ addUserKnob {7 latm R -4 4}
+ latm {{1/pi}}
+}

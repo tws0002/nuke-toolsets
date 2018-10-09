@@ -1,0 +1,102 @@
+set cut_paste_input [stack 0]
+version 9.0 v4
+push $cut_paste_input
+Dot {
+ name Dot5
+ selected true
+ xpos 1784
+ ypos 1638
+}
+set N3d1b6e40 [stack 0]
+OneView {
+ view right
+ name OneView3
+ selected true
+ xpos 1976
+ ypos 1909
+}
+Dot {
+ name Dot12
+ selected true
+ xpos 2010
+ ypos 2034
+}
+set N178b3340 [stack 0]
+push $N3d1b6e40
+OneView {
+ name OneView4
+ selected true
+ xpos 1470
+ ypos 1929
+}
+Dot {
+ name Dot11
+ selected true
+ xpos 1504
+ ypos 2158
+}
+set Na912f550 [stack 0]
+clone noded3d1e3310|Blur|2547 Blur {
+ channels rgba
+ size 20
+ crop false
+ name Blur1
+ selected true
+ xpos 1614
+ ypos 2155
+}
+set C3d1e3310 [stack 0]
+push $N178b3340
+IDistort {
+ channels rgba
+ uv disparityR
+ name IDistort2
+ selected true
+ xpos 1800
+ ypos 2031
+}
+clone $C3d1e3310 {
+ xpos 1800
+ ypos 2066
+ selected true
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge1
+ selected true
+ xpos 1800
+ ypos 2155
+}
+IDistort {
+ channels rgba
+ uv disparityR
+ uv_scale -1
+ name IDistort3
+ selected true
+ xpos 1800
+ ypos 2248
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge2
+ selected true
+ xpos 1976
+ ypos 2248
+}
+push $Na912f550
+Dot {
+ name Dot7
+ selected true
+ xpos 1504
+ ypos 2665
+}
+JoinViews {
+ inputs 2
+ name JoinViews6
+ selected true
+ xpos 1976
+ ypos 2662
+ viewassoc "left\nright"
+}

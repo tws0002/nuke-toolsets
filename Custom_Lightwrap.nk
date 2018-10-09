@@ -1,0 +1,229 @@
+set cut_paste_input [stack 0]
+version 8.0 v1b41
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x7171c600
+ label "Custom Lightwrap"
+ note_font_size 42
+ selected true
+ xpos 1271
+ ypos 178
+ bdwidth 1885
+ bdheight 1340
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "3 layers of bleeding. Tweek core medium and large blead individually. "
+ selected true
+ xpos 2681
+ ypos 556
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "Use the merge nodes mix slider to tweek the opacity of the bleeds individually."
+ selected true
+ xpos 1281
+ ypos 1039
+}
+StickyNote {
+ inputs 0
+ name StickyNote8
+ label "Premultiplyed FG IN"
+ selected true
+ xpos 1670
+ ypos 271
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ label "BG IN"
+ selected true
+ xpos 2741
+ ypos 296
+}
+push $cut_paste_input
+Dot {
+ name Dot29
+ selected true
+ xpos 1711
+ ypos 334
+}
+Dot {
+ name Dot30
+ selected true
+ xpos 1711
+ ypos 480
+}
+set N722b7a70 [stack 0]
+Dot {
+ name Dot31
+ selected true
+ xpos 1444
+ ypos 480
+}
+Dot {
+ name Dot32
+ selected true
+ xpos 1444
+ ypos 1330
+}
+push $N722b7a70
+push $N722b7a70
+Dot {
+ inputs 0
+ name Dot33
+ selected true
+ xpos 2824
+ ypos 301
+}
+Keyer {
+ operation "luminance key"
+ range {0.669664365 0.9010538793 1 1}
+ name Keyer3
+ selected true
+ xpos 2790
+ ypos 334
+}
+Premult {
+ name Premult5
+ selected true
+ xpos 2790
+ ypos 407
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge18
+ selected true
+ xpos 2790
+ ypos 477
+}
+set N722d4cf0 [stack 0]
+Blur {
+ size 180
+ name largeBlur
+ selected true
+ xpos 2966
+ ypos 604
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge19
+ selected true
+ xpos 2966
+ ypos 706
+}
+Dot {
+ name Dot34
+ selected true
+ xpos 3000
+ ypos 1199
+}
+push $N722b7a70
+push $N722d4cf0
+Blur {
+ size 45.5
+ name MediumBlur
+ selected true
+ xpos 2790
+ ypos 597
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge20
+ selected true
+ xpos 2790
+ ypos 708
+}
+Dot {
+ name Dot35
+ selected true
+ xpos 2824
+ ypos 1035
+}
+push $N722b7a70
+push $N722d4cf0
+Blur {
+ size 4
+ name coreBlur
+ selected true
+ xpos 2599
+ ypos 598
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge30
+ selected true
+ xpos 2599
+ ypos 709
+}
+Dot {
+ name Dot36
+ selected true
+ xpos 2633
+ ypos 883
+}
+push $N722b7a70
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge31
+ selected true
+ xpos 1677
+ ypos 880
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge32
+ selected true
+ xpos 1676
+ ypos 1032
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge33
+ selected true
+ xpos 1676
+ ypos 1196
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy5
+ selected true
+ xpos 1676
+ ypos 1322
+}
+push 0
+Merge2 {
+ inputs 2
+ name Merge34
+ selected true
+ xpos 1676
+ ypos 1478
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label "Comp lightwraped FG over BG"
+ selected true
+ xpos 1517
+ ypos 1477
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "This is the LumaTolerance setting to define the the bleed area from the brightness of from the background."
+ selected true
+ xpos 2620
+ ypos 364
+}

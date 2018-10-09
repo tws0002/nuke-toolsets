@@ -1,0 +1,204 @@
+set cut_paste_input [stack 0]
+version 9.0 v4
+push $cut_paste_input
+Dot {
+ name Dot4
+ selected true
+ xpos 1899
+ ypos 430
+}
+set Nb06c5750 [stack 0]
+Dot {
+ name Dot9
+ selected true
+ xpos 1545
+ ypos 652
+}
+Dot {
+ name Dot8
+ selected true
+ xpos 1545
+ ypos 1160
+}
+set N8d200a40 [stack 0]
+Shuffle {
+ name Shuffle3
+ selected true
+ xpos 1511
+ ypos 1481
+}
+push $Nb06c5750
+Retime {
+ input.first 1001
+ input.last 1168
+ output.first 1001
+ output.last 1336
+ speed 0.5
+ filter nearest
+ time ""
+ name Retime2
+ selected true
+ xpos 1865
+ ypos 571
+}
+set N3d1b98c0 [stack 0]
+OneView {
+ name OneView35
+ selected true
+ xpos 1719
+ ypos 629
+}
+set N37448ef0 [stack 0]
+push $N3d1b98c0
+OneView {
+ view right
+ name OneView36
+ selected true
+ xpos 2036
+ ypos 630
+}
+set N8d228250 [stack 0]
+Switch {
+ inputs 2
+ which {{curve(((frame-1017)%(1018-1017+1))+1017) x1017 0 1}}
+ name Switch5
+ selected true
+ xpos 2036
+ ypos 711
+}
+VectorGenerator {
+ motionEstimation Regularized
+ vectorDetailLocal {{parent.VectorGenerator2.vectorDetail.left}}
+ smoothnessLocal {{parent.VectorGenerator2.smoothness.left}}
+ computedVectorFlag 33
+ vectorDetailReg 1
+ output Background
+ Advanced 1
+ flickerCompensation true
+ Tolerances 1
+ weightRed 0.2
+ weightGreen 0.8
+ weightBlue 0
+ name VectorGenerator1
+ selected true
+ xpos 2036
+ ypos 878
+}
+Shuffle {
+ in motion
+ in2 disparity
+ name Shuffle6
+ selected true
+ xpos 2036
+ ypos 970
+}
+Retime {
+ input.first 1001
+ input.last 1336
+ output.first 1001
+ output.last 1168
+ speed 2
+ filter none
+ time ""
+ name Retime1
+ selected true
+ xpos 2036
+ ypos 1064
+}
+Dot {
+ name Dot6
+ selected true
+ xpos 2070
+ ypos 1274
+}
+push $N8d228250
+push $N37448ef0
+Switch {
+ inputs 2
+ which {{curve(((frame-1017)%(1018-1017+1))+1017) x1017 0 1}}
+ name Switch3
+ selected true
+ xpos 1719
+ ypos 706
+}
+VectorGenerator {
+ motionEstimation Regularized
+ vectorDetailLocal 1
+ smoothnessLocal 0.6
+ computedVectorFlag 32
+ vectorDetailReg 1
+ Advanced 1
+ flickerCompensation true
+ Tolerances 1
+ weightRed 0.2
+ weightGreen 0.8
+ weightBlue 0
+ name VectorGenerator2
+ selected true
+ xpos 1719
+ ypos 872
+}
+Shuffle {
+ in motion
+ in2 rgba
+ name Shuffle4
+ selected true
+ xpos 1719
+ ypos 933
+}
+Retime {
+ input.last 2124
+ output.last 1062
+ speed 2
+ filter none
+ time ""
+ name Retime6
+ selected true
+ xpos 1719
+ ypos 1045
+}
+push $N8d200a40
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 disparityR.x
+ from1 rgba.green
+ to1 disparityR.y
+ name Copy2
+ selected true
+ xpos 1719
+ ypos 1148
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 disparityL.x
+ from1 rgba.green
+ to1 disparityL.y
+ name Copy1
+ selected true
+ xpos 1719
+ ypos 1262
+}
+Blur {
+ channels disparity
+ name Blur34
+ selected true
+ xpos 1719
+ ypos 1350
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 rgba.red
+ from1 rgba.green
+ to1 rgba.green
+ from2 rgba.blue
+ to2 rgba.blue
+ from3 rgba.alpha
+ to3 rgba.alpha
+ name Copy3
+ selected true
+ xpos 1719
+ ypos 1462
+}
